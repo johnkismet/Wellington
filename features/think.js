@@ -5,6 +5,7 @@ export default function think(message) {
 	if (thought) {
 		message.channel.send(thought);
 		thoughts.splice(index, 1);
+		console.log(`I have ${thoughts.length} thoughts left`);
 	} else {
 		message.channel.send("I have no thoughts at this time");
 	}

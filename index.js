@@ -3,8 +3,8 @@ import startRace from "./features/codeRace";
 import dad from "./features/dad";
 import help from "./features/help";
 import schedule from "./features/schedule";
-import think from "./features/think";
 import decide from "./features/decide";
+import checkForTriggers from "./features/checkForTriggers";
 
 require("dotenv").config();
 const request = require("request");
@@ -22,15 +22,7 @@ client.on("message", (message) => {
 	if (message.author.bot) return;
 
 	// outlier checks
-	if (
-		message.content.includes("lol") ||
-		message.content.includes("lmao") ||
-		message.content.includes("haha")
-	) {
-		if (Math.floor(Math.random() * 10000) > 8900) {
-			message.reply("That isn't funny");
-		}
-	}
+	checkForTriggers(message);
 
 	if (
 		raceStarted &&
@@ -46,15 +38,6 @@ client.on("message", (message) => {
 				`I'm sorry, that doesn't match the text exactly. Please try again.`
 			);
 		}
-	}
-
-	if (
-		message.content.toLowerCase().includes("thinking") ||
-		message.content.toLowerCase().includes("thoughts") ||
-		(message.content.toLowerCase().includes("think") &&
-			message.content.toLowerCase().includes("sir wellington"))
-	) {
-		think(message);
 	}
 
 	// begin regular commands
