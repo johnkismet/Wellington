@@ -9,13 +9,19 @@ export default function checkForTriggers(message) {
 			message.reply("It's not that funny");
 		}
 	}
-
 	if (
-		msg.includes("thinking") ||
-		msg.includes("thoughts") ||
-		msg.includes("mind") ||
-		(msg.includes("think") && msg.includes("sir wellington"))
+		(msg.includes("think") ||
+			msg.includes("thinking") ||
+			msg.includes("thoughts") ||
+			msg.includes("mind")) &&
+		msg.includes("sir wellington")
 	) {
+		// if (
+		// 	msg.includes("thinking") ||
+		// 	msg.includes("thoughts") ||
+		// 	msg.includes("mind") ||
+		// 	(msg.includes("think") && msg.includes("sir wellington"))
+		// )
 		console.log(
 			`${message.author} wants to know what Sir Wellington's thinking`
 		);
