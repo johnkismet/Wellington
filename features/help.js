@@ -1,4 +1,5 @@
 export default function help(message) {
+	console.log(`${message.author} asked for help`);
 	message.channel.send(
 		`
         **!schedule** - Lists our streaming schedule
@@ -7,6 +8,8 @@ export default function help(message) {
 **!end** - Ends a code race
 **!dad** - Sends a dad joke
 **!bored** - Sir Wellington will suggest an activity
-        `
+
+**You can also ask Sir Wellington what he's thinking anytime. Just make sure you address him so he knows you're talking to him**
+         `
 	);
 }

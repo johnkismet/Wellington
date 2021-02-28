@@ -5,6 +5,7 @@ export default function checkForTriggers(message) {
 
 	if (msg.includes("lol") || msg.includes("lmao") || msg.includes("haha")) {
 		if (Math.floor(Math.random() * 10000) > 8900) {
+			console.log(`${message.author} triggered something`);
 			message.reply("It's not that funny");
 		}
 	}
@@ -15,6 +16,9 @@ export default function checkForTriggers(message) {
 		msg.includes("mind") ||
 		(msg.includes("think") && msg.includes("sir wellington"))
 	) {
+		console.log(
+			`${message.author} wants to know what Sir Wellington's thinking`
+		);
 		think(message);
 	}
 
@@ -22,6 +26,7 @@ export default function checkForTriggers(message) {
 		msg.includes("ayylmao") ||
 		(msg.includes("ayy") && msg.includes("lmao"))
 	) {
+		console.log(`${message.author} said ayy lmao`);
 		message.reply("ayylmao 👽");
 	}
 }

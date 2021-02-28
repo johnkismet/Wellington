@@ -1,4 +1,8 @@
+const request = require("request");
+
 export default function bored(message) {
+	console.log(`${message.author} is bored`);
+
 	request(
 		"http://www.boredapi.com/api/activity/",
 		{ json: true },
