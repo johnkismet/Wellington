@@ -1,4 +1,10 @@
+import bored from "./features/bored";
 import startRace from "./features/codeRace";
+import dad from "./features/dad";
+import help from "./features/help";
+import schedule from "./features/schedule";
+import think from "./features/think";
+import decide from "./features/decide";
 
 require("dotenv").config();
 const request = require("request");
@@ -25,6 +31,7 @@ client.on("message", (message) => {
 			message.reply("That isn't funny");
 		}
 	}
+
 	if (
 		raceStarted &&
 		message.content !== "!race" &&
@@ -40,6 +47,16 @@ client.on("message", (message) => {
 			);
 		}
 	}
+
+	if (
+		message.content.toLowerCase().includes("thinking") ||
+		message.content.toLowerCase().includes("thoughts") ||
+		(message.content.toLowerCase().includes("think") &&
+			message.content.toLowerCase().includes("sir wellington"))
+	) {
+		think(message);
+	}
+
 	// begin regular commands
 	if (!message.content.startsWith(prefix)) return;
 
@@ -47,47 +64,23 @@ client.on("message", (message) => {
 	const command = args.shift().toLowerCase();
 
 	if (command === "commands" || command === "help") {
-		message.channel.send(
-			`
-			**!schedule** - Lists our streaming schedule
-**!race** - Begins a code race
-**!end** - Ends a code race
-**!dad** - Sends a dad joke
-**!bored** - Sir Wellington will suggest an activity
-			`
-		);
+		help(message);
+	}
+
+	if (command === "decide") {
+		decide(message, args);
 	}
 
 	if (command === "schedule") {
-		message.channel.send(
-			"Code Lateral streams thrice a week, every Tuesday (5pm), Thursday (5pm), and Saturday (6pm)."
-		);
+		schedule(message);
 	}
 
 	if (command === "dad") {
-		request(
-			"https://icanhazdadjoke.com/slack",
-			{ json: true },
-			(err, res, body) => {
-				if (err) {
-					return console.log(err);
-				}
-				message.channel.send(body.attachments[0].text);
-			}
-		);
+		dad(message);
 	}
 
 	if (command === "bored") {
-		request(
-			"http://www.boredapi.com/api/activity/",
-			{ json: true },
-			(err, res, body) => {
-				if (err) {
-					return console.log(err);
-				}
-				message.channel.send(`${body.activity}! ${body.link}`);
-			}
-		);
+		bored(message);
 	}
 
 	if (command === "end" && raceStarted) {
