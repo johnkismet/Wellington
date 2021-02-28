@@ -46,10 +46,6 @@ export const code_arr = [
 		text: "for (int i = 0; str[i] != '\0'; ++i)",
 	},
 	{
-		file: "https://i.imgur.com/UMrLlbT.png",
-		text: "if (x >= 0 && y >= 0 && x >  y) return x * (3 * x + 1) + y;",
-	},
-	{
 		file: "https://i.imgur.com/kLHQF8Q.png",
 		text:
 			"byRecipe[ingredient].forEach(([i, q]) => stack.push([i, q * quantity]));",
