@@ -5,17 +5,40 @@ import { Link } from "./models/Link";
 export function addLink(message, command, args) {
 	// add link model to database if it doesn't match any others
 	// console.log(args);
-	if (args.length < 2) {
-		message.channel.send("Wrong syntax. Usage: !add {song/playlist} {link}");
+	if (args.length > 3) {
+		message.channel.send(
+			"You can only have 3 parameters for the function to work. If your title has spaces please separate the spaces with dashes like-so"
+		);
 		return;
 	}
+
+	if (args.length < 3) {
+		message.channel.send(
+			"Wrong syntax. Usage: `!add {song/playlist} {title} {link}`"
+		);
+		return;
+	}
+
+	if (args[0].toLowerCase() != "song" && args[0].toLowerCase() != "playlist") {
+		console.log(args[0]);
+		if (args[0].toLowerCase() == "playlist") {
+			console.log("playlist");
+		} else {
+			message.channel.send(
+				"You must use `!add {song / playlist} {title-to-display} {link}`"
+			);
+			return;
+		}
+	}
+
 	Link.findOne({ text: args[1] }).exec(function (err, link) {
 		if (link) {
 			message.channel.send("You already added that link, asshole");
 			return;
 		} else {
 			const newLink = new Link({
-				text: args[1].toLowerCase(),
+				text: args[2].toLowerCase(),
+				title: args[1].toLowerCase(),
 				type: args[0].toLowerCase(),
 			});
 
@@ -50,17 +73,15 @@ export function getPlaylist(message, command, amount) {
 		let playlists = [];
 
 		for (let link of playlist) {
-			console.log("link");
 			if (link.text) {
 				if (link.type == "playlist") {
-					playlists.push(link.text);
+					playlists.push(`[${link.title}](${link.text})`);
 				}
 				if (link.type == "song") {
-					songs.push(link.text);
+					songs.push(`[${link.title}](${link.text})`);
 				}
 			}
 		}
-
 		if (amount.length == 0) {
 			const newEmbed = new Discord.MessageEmbed()
 				.setColor("#ffffff")
