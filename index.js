@@ -91,7 +91,7 @@ client.on("message", (message) => {
 		case "playlist":
 		case "add":
 		case "delete":
-			handle_playlist(message);
+			handle_playlist(message, command, args);
 			break;
 	}
 
