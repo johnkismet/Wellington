@@ -25,6 +25,7 @@
 		"discord.js": "^12.5.1",
 		"dotenv": "^8.2.0",
 		"esm": "^3.2.25",
+		"mongoose": "^5.11.19",
 		"request": "^2.88.2"
 	},
 	"devDependencies": {
